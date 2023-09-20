@@ -10,16 +10,19 @@ const Navbar = async () => {
 
   return (
     <div className='w-full px-4 py-8 bg-gray-400 flex flex-row gap-4'>
-
       <Link href="/">
         Home
       </Link>
       <Link href="/dashboard">
         Dashboard
       </Link>
+      {session && session.user?.role === 'ADMIN' && (
+        <Link href="/admin">
+          Admin
+        </Link>
+      )}
 
       <div className='ml-auto flex gap-4'>
-
       {session && session.user?.email ? (
         <>
           <p className="font-bold"> {session.user?.email}</p>

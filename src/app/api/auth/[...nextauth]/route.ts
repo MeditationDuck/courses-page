@@ -25,20 +25,20 @@ export const authOptions: AuthOptions = {
           where: { email }
         })
 
-        if(!user) return null;
+        if(!user) return null
 
-        const userPassword = user.passwordHash;
-        const isValidPassword = bcrypt.compareSync(password, userPassword);
+        const userPassword = user.passwordHash
+        const isValidPassword = bcrypt.compareSync(password, userPassword)
         
-        if(!isValidPassword) return null;
+        if(!isValidPassword) return null
 
-        return user;
+        return user
       }
     })
   ],
   pages: {
-    signIn: '/auth/signin',
-    signOut: '/auth/signout',
+    signIn: '/signin',
+    signOut: '/signout',
   },
   secret: process.env.NEXTAUTH_SECRET,
   jwt: {
@@ -68,6 +68,7 @@ export const authOptions: AuthOptions = {
     async session(params: {session: Session; token: JWT; user: User}) {
       if(params.session.user){
         params.session.user.email = params.token.email;
+        params.session.user.role = params.token.role;
       }
       return params.session;
     },
@@ -79,7 +80,8 @@ export const authOptions: AuthOptions = {
       isNewUser?: boolean | undefined;
     }) {
       if(params.user){
-        params.token.email = params.user.email;
+        params.token.email = params.user.email
+        params.token.role = params.user.role
       }
       return params.token;
     }
