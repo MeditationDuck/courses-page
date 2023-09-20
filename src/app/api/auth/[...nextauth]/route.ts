@@ -79,7 +79,8 @@ export const authOptions: AuthOptions = {
       profile?: Profile | undefined; 
       isNewUser?: boolean | undefined;
     }) {
-      if(params.user){
+      if(params.user && params.user.email){
+
         params.token.email = params.user.email
         params.token.role = params.user.role
       }

@@ -1,5 +1,7 @@
 import React from 'react'
 import { getUserCount } from '@/actions/get-total-user'
+import { Button } from '@/components/ui/button'
+import ProductManage from './components/product-manage'
 
 const AdminHomePage = async () => {
 
@@ -15,6 +17,8 @@ const AdminHomePage = async () => {
           <h1 className='text-4xl font-bold'>{userCount}</h1>
         </div>
       </div>
+      {/* this can be admin menu */}
+      <ProductManage /> 
     </div>
   )
 }
