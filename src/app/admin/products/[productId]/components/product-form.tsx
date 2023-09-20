@@ -40,7 +40,7 @@ interface plainProduct {
 }
 
 interface ProductFormProps {
-  initialData: plainProduct | null
+  initialData: Product | null
 }
 
 const formSchema = z.object({
@@ -85,9 +85,11 @@ export const ProductForm = ({
   const onSubmit = async ( data: ProductFormValues) => {
     try{
       setLoading(true)
+
       if(initialData) {
         await axios.patch(`/api/products/${params.productId}`, data)
       }else {
+        console.log(data)
         await axios.post(`/api/products`, data)
       }
       router.refresh()

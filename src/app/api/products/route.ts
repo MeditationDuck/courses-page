@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { UserRole } from '@prisma/client'
 import prisma from '@/lib/prisma'
+import { Decimal } from '@prisma/client/runtime/library'
 
 export async function POST(
   req: Request,
@@ -12,7 +13,6 @@ export async function POST(
     return new NextResponse("Unauthenticated",{ status: 401 })
   }
   const body = await req.json()
-
   const {
     name,
     description,
@@ -35,6 +35,7 @@ export async function POST(
         description,
         price,
         stock,
+        isArchived,
         images: {
           createMany: {
             data: [
@@ -42,7 +43,6 @@ export async function POST(
             ]
           }
         },
-        isArchived,
       }
     })
     return NextResponse.json(product)

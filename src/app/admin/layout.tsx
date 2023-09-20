@@ -12,9 +12,7 @@ const AdminLayout = async ({
   const session = await getServerSession(authOptions)
   if(session?.user.role !== UserRole.ADMIN ){
     return (
-      <div>
-        Access denied.
-      </div>
+      <div>Access denied.</div>
     )
   }
   
