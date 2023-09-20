@@ -1,6 +1,6 @@
 import { getServerSession } from 'next-auth'
 import React from 'react'
-import { authOptions } from '../api/auth/[...nextauth]/route'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import Link from 'next/link'
 
 const Navbar = async () => {

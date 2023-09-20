@@ -1,4 +1,4 @@
-import SignOut from "@/app/components/SignOut";
+import SignOut from "@/components/SignOut";
 
 const SignOutPage = () => {
   return (

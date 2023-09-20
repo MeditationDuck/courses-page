@@ -23,16 +23,18 @@ const SignInForm = () => {
         redirect: false,
         callbackUrl: '/',
       })
+      console.log(signInResponse)
 
-      if(!signInResponse || signInResponse.ok !== true){
+      if(!signInResponse || signInResponse.ok !== true || signInResponse.url === null){
         setMessage("Invalid credentials")
       }else{
+        // when it might be success 
         router.refresh()
+        //refresh for call useEffect
       }
     }catch(err) {
       console.log(err)
     }
-    setMessage(message)
   }
 
   useEffect(() => {

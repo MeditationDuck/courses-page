@@ -1,5 +1,5 @@
 import React from 'react'
-import { getUserCount } from '@/app/actions/get-total-user'
+import { getUserCount } from '@/actions/get-total-user'
 
 const AdminHomePage = async () => {
 
