@@ -1,0 +1,22 @@
+import React from 'react'
+import { getUserCount } from '@/app/actions/get-total-user'
+
+const AdminHomePage = async () => {
+
+  const userCount = await getUserCount()
+
+  return (
+    <div className='flex-col'>
+      <h1 className='text-4xl font-bold'>Admin Home Page</h1>
+      <p>Dashboard for only admins</p>
+      <div className=' w-[50%] bg-zinc-100 flex-col justify-center p-2 pb-6 rounded-md m-4'>
+        <div className='text-md'>Total Users</div>
+        <div className='flex items-center justify-center'>
+          <h1 className='text-4xl font-bold'>{userCount}</h1>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default AdminHomePage

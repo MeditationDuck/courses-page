@@ -67,10 +67,10 @@ export const authOptions: AuthOptions = {
   callbacks: {
     async session(params: {session: Session; token: JWT; user: User}) {
       if(params.session.user){
-        params.session.user.email = params.token.email;
-        params.session.user.role = params.token.role;
+        params.session.user.email = params.token.email
+        params.session.user.role = params.token.role
       }
-      return params.session;
+      return params.session
     },
     async jwt(params: {
       token: JWT; 

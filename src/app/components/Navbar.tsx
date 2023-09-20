@@ -7,7 +7,6 @@ const Navbar = async () => {
   
   const session = await getServerSession(authOptions)
 
-
   return (
     <div className='w-full px-4 py-8 bg-gray-400 flex flex-row gap-4'>
       <Link href="/">
