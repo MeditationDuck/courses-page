@@ -53,10 +53,10 @@ export async function POST(
 }
 
 export async function GET (req: Request){
-  const session = await getServerSession(authOptions)
-  if(session?.user.role !== UserRole.ADMIN ){
-    return new NextResponse("Unauthenticated",{ status: 401 })
-  }
+  // const session = await getServerSession(authOptions)
+  // if(session?.user.role !== UserRole.ADMIN ){
+  //   return new NextResponse("Unauthenticated",{ status: 401 })
+  // }
   try{
     const products = await prisma.product.findMany({
       include: {

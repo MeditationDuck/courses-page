@@ -17,10 +17,8 @@ const ProductPage = async ({
       images: true,
     }
   })
-  // let data = null;
 
  
-
   return (
     <div className="flex-col">
       <div className="space-y p-8 pt-6">

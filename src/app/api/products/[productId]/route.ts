@@ -50,15 +50,13 @@ export async function PATCH (
   if(!description) return new NextResponse("Missing description", {status: 400})
   if(!images || !images.length) return new NextResponse("Missing images", {status: 400})
   if(!price) return new NextResponse("Missing price", {status: 400})
-  if(!stock) return new NextResponse("Missing stock", {status: 400})
-
+  if(stock === undefined) return new NextResponse("Missing stock", {status: 400})
   try{
     await prisma.image.deleteMany({
       where: {
         productId: params.productId
       }
     })
-    
     const product = await prisma.product.update({
       where: { id: params.productId },
       data: {

@@ -47,7 +47,8 @@ const formSchema = z.object({
   name: z.string().nonempty("Name is required"),
   description: z.string().nonempty("Description is required"),
   price: z.coerce.number().positive("Price must be positive"),
-  stock: z.coerce.number().int().positive("Stock must be positive"),
+  //stock is zero or positive integer
+  stock: z.coerce.number().int().min(0, "Stock must be positive"),
   isArchived: z.boolean().default(false).optional(),
   images: z.object({ url: z.string() }).array(),
 })
