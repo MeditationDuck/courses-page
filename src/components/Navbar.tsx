@@ -9,7 +9,6 @@ const Navbar = async () => {
   return (
     <div className='border-b'>
       <MainNav session={session}/>
-      
     </div>
   )
 }

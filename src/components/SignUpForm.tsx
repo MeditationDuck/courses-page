@@ -54,7 +54,7 @@ const SignUpForm = () => {
     </Button>
     <p className="text-sm font-light">
         Do have an account?
-        <a href="/signup" className="font-medium hover:underline pl-2">Sign in</a>
+        <a href="/signin" className="font-medium hover:underline pl-2">Sign in</a>
     </p>
     {/* <p>{message}</p> */}
   </div>

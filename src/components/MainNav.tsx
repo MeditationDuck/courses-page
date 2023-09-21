@@ -31,7 +31,6 @@ const MainNav = ({
       <div className='ml-auto flex gap-4'>
       {session && session.user?.email ? (
         <>
-          {/* <p className=""> {session.user?.email}</p> */}
           <Button variant="outline"
             onClick={() => router.push("/signout")}
           >
