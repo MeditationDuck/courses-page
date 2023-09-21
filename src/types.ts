@@ -2,9 +2,9 @@ export interface Product {
   id: string
   name: string
   description: string
-  price: string
+  price: number
   stock: number
-  isFeature: boolean
+  isArchived: boolean
   images: Image[]
 }
 

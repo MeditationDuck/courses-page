@@ -13,9 +13,11 @@ const Navbar = async () => {
         <Link href="/">
           Home
         </Link>
-        <Link href="/dashboard">
-          Dashboard
-        </Link>
+        {session && typeof session.user?.userId === 'string' && (
+          <Link href={`/${session.user.userId}`}>
+            Dashboard
+          </Link>
+        )}
         {session && session.user?.role === 'ADMIN' && (
           <Link href="/admin">
             Admin

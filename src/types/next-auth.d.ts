@@ -6,6 +6,7 @@ import 'next-auth/jwt'
 
 declare module 'next-auth/jwt' {
   interface JWT {
+    userId: string
     email: string
     role: UserRole
   }
@@ -14,6 +15,7 @@ declare module 'next-auth/jwt' {
 declare module 'next-auth' {
   interface Session {
     user: User & { 
+      userId: string
       email: string
       role: UserRole
     }

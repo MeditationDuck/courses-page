@@ -9,7 +9,6 @@ interface ProtectedLayoutProps {
 const ProtectedLayout = async ({children}: ProtectedLayoutProps) => {
 
   const session = await getServerSession(authOptions)
-
   if(!session || !session.user?.email) {
     return (
       <div>

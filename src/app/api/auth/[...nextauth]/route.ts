@@ -67,6 +67,7 @@ export const authOptions: AuthOptions = {
   callbacks: {
     async session(params: {session: Session; token: JWT; user: User}) {
       if(params.session.user){
+        params.session.user.userId = params.token.userId
         params.session.user.email = params.token.email
         params.session.user.role = params.token.role
       }
@@ -80,7 +81,7 @@ export const authOptions: AuthOptions = {
       isNewUser?: boolean | undefined;
     }) {
       if(params.user && params.user.email){
-
+        params.token.userId = params.user.id
         params.token.email = params.user.email
         params.token.role = params.user.role
       }

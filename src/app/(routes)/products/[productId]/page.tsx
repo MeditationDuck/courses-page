@@ -19,12 +19,8 @@ const ProductPage = async ({
 }: ProductPageProps) => {
 
   const session = await getServerSession(authOptions)
-  let user
-  if(typeof session?.user?.email === 'string') {
-    user = await getUser(session?.user?.email)
-  }
-
-  const userId: string | undefined = user?.id
+  
+  const userId: string | undefined = session?.user?.userId
   const product: Product = await getProduct(params.productId)
   return ( 
     <ProductClient product={product} userId={userId} />    
