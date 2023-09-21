@@ -19,19 +19,16 @@ const UserPage = async ({
       </div>
     )
   }
-
   const products = await getUserOwnedProducts(params.userId)
-
   return (
-    <div className='flex flex-col'>
-    <Heading title="User's Orders." description="View your orders." />
+    <div className='flex flex-col w-full px-4 lg:px-8'>
+    <Heading title="Your Orders" description="View your orders." />
     <div>
       {/* <h1>Your Orders</h1> */}
       <div>
         <ProductList products={products} />
       </div>
     </div>
-    
   </div>
     
   )

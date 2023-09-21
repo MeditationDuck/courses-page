@@ -1,8 +1,13 @@
 import prisma from '@/lib/prisma'
 import { Product } from '@/types'
 
-export const getProducts = async (): Promise<Product[]> => {
+export const getAvailableProducts = async (): Promise<Product[]> => {
   const res = await prisma.product.findMany({
+    where: {
+      stock: {
+        gt: 0
+      }
+    },
     include: {
       images: true
     }
