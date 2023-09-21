@@ -4,17 +4,19 @@ import { Button } from "@/components/ui/button";
 import { Product } from "@/types";
 import axios from "axios";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
 interface ProductClientProps {
   product: Product
   userId: string | undefined
+  isOwned: boolean
 }
 
 const ProductClient = async ({
   product,
-  userId
+  userId,
+  isOwned
 }: ProductClientProps) => {
   
   const onCheckout = async () => {
@@ -22,7 +24,6 @@ const ProductClient = async ({
       productId: product.id,
       userId: userId
     })
-
     window.location = response.data.url
   }
   return (
@@ -53,11 +54,12 @@ const ProductClient = async ({
       
       <Button
         onClick={onCheckout}
-        disabled={!userId}
+        disabled={ !userId || isOwned }
       >
         Buy Now
       </Button>
       {!userId && <p>Sign in to buy</p>}
+      {isOwned && <p>You have already owned this Product</p>}
     </div>
   );
 }

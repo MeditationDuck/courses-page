@@ -42,7 +42,14 @@ export async function POST(
   })
   if(!user) return new NextResponse("user not found", { status: 404 })
 
-
+  const payedOrderExists = await prisma.order.findFirst({
+    where: {
+      userId,
+      productId,
+      isPaid: true,
+    },
+  });
+  if(payedOrderExists) return new NextResponse("order already exists", { status: 400 })
 
   const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = []
   if(product){
@@ -59,13 +66,21 @@ export async function POST(
     })
   }
 
-  const order = await prisma.order.create({
-    data: {
+  let order = await prisma.order.findFirst({
+    where: {
       userId,
       productId,
     },
   })
-
+  if(!order) {
+    order = await prisma.order.create({
+      data: {
+        userId,
+        productId,
+      },
+    })
+  }
+  
   const session = await stripe.checkout.sessions.create({
     line_items,
     mode: "payment",
