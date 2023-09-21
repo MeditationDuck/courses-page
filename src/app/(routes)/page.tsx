@@ -8,13 +8,12 @@ import Image from 'next/image'
 
 const Home = async () => {
   const products = await getProducts();
-
+  
   return (
    <div className='w-full sm:p-6 lg:px-8'>
       <h1 className='text-3xl py-4'>Home Page</h1>
       <Separator />
       <div className='p-2' />
-
       <ProductList products={products} />
    </div>
   )

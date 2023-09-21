@@ -6,9 +6,15 @@ const DashboardPage = () => {
     <div>
       DashboardPage
 
+
+      User's Orders.
+
+      Users's Profile.
+
       <Button>
         Click Here
       </Button>
+      
     </div>
   )
 }
