@@ -21,6 +21,7 @@ model User {
   email        String   @unique
   passwordHash String
   role         UserRole @default(USER)
+  orders       Order[]
 }
 
 model Product {
@@ -31,6 +32,7 @@ model Product {
   stock       Int
   isArchived  Boolean  @default(false)
   images      Image[]
+  orders      Order[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -41,5 +43,19 @@ model Image {
   productId String
   product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
+  @@index([productId], name: "productId")
+}
+
+model Order {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  productId String
+  Product   Product  @relation(fields: [productId], references: [id])
+  isPaid    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId], name: "userId")
   @@index([productId], name: "productId")
 }

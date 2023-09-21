@@ -9,20 +9,22 @@ import { useEffect } from "react";
 
 interface ProductClientProps {
   product: Product
+  userId: string | undefined
 }
 
 const ProductClient = async ({
-  product
+  product,
+  userId
 }: ProductClientProps) => {
-  // const searchParams = useSearchParams()
+  
+  const onCheckout = async () => {
+    const response = await axios.post('/api/checkout', {
+      productId: product.id,
+      userId: userId
+    })
 
-  // const onCheckout = async () => {
-  //   const response = await axios.post('/api/checkout', {
-  //     productId: product.id
-  //   })
-
-
-  // }
+    window.location = response.data.url
+  }
   return (
     <div className="flex flex-col p-4 gap-y-4">
       <div className="">
@@ -50,10 +52,12 @@ const ProductClient = async ({
       </div>
       
       <Button
-        // onClick={onCheckout}
+        onClick={onCheckout}
+        disabled={!userId}
       >
         Buy Now
       </Button>
+      {!userId && <p>Sign in to buy</p>}
     </div>
   );
 }

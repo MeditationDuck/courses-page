@@ -13,3 +13,8 @@ export interface Image {
   url: string
   productId: string
 }
+
+export interface User {
+  id: string
+  email: string
+}
