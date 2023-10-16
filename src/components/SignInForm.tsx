@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import { Input } from './ui/input'
 import { Button } from './ui/button'
 import { Loader2 } from 'lucide-react'
+import GoogleSignInButton from './GoogleSingInButton'
 
 const SignInForm = () => {
 
@@ -20,7 +21,7 @@ const SignInForm = () => {
   const handleSubmit = async () => {
     setIsLoading(true)
     
-    setMessage("Signing up...")
+    setMessage("Signing in...")
     try {
       const signInResponse = await signIn('credentials', {
         email,
@@ -79,11 +80,16 @@ const SignInForm = () => {
           )}
           Sign In
         </Button>
+        or 
+
+        <GoogleSignInButton>
+          Sign in with Google
+        </GoogleSignInButton>
         <p className="text-sm font-light">
             Don't have an account yet?
             <a href="/signup" className="font-medium hover:underline pl-2">Sign up</a>
         </p>
-        {/* <p>{message}</p> */}
+        <p>{message}</p>
       </div>
   );
 }

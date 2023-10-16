@@ -1,13 +1,20 @@
 import prisma from "@/lib/prisma";
-import { Account, AuthOptions, Profile, Session, User } from "next-auth";
+import { Account, AuthOptions, Profile, Session, User} from "next-auth";
 import  CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { JWT } from "next-auth/jwt";
 import NextAuth from "next-auth/next";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+
 
 export const authOptions: AuthOptions = {
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!
+    }),
     CredentialsProvider({
       name: 'Credentials',
 
@@ -28,14 +35,16 @@ export const authOptions: AuthOptions = {
         if(!user) return null
 
         const userPassword = user.passwordHash
-        const isValidPassword = bcrypt.compareSync(password, userPassword)
-        
-        if(!isValidPassword) return null
 
+        if(userPassword){
+          const isValidPassword = bcrypt.compareSync(password, userPassword)
+          if(!isValidPassword) return null
+        }
         return user
       }
     })
   ],
+  adapter: PrismaAdapter(prisma),
   pages: {
     signIn: '/signin',
     signOut: '/signout',
@@ -65,7 +74,7 @@ export const authOptions: AuthOptions = {
     updateAge: 24 * 60 * 60, // 24 hours
   },
   callbacks: {
-    async session(params: {session: Session; token: JWT; user: User}) {
+    async session(params: {session: Session; token: JWT; user:User}) {
       if(params.session.user){
         params.session.user.userId = params.token.userId
         params.session.user.email = params.token.email

@@ -20,7 +20,7 @@ const SignUpForm = () => {
     setMessage("Signing up...")
     const message = await signUp(email, password)
     setMessage(message)
-    router.push('/')
+    router.push('/signin')
     setIsLoading(false)
   } 
 
@@ -50,13 +50,13 @@ const SignUpForm = () => {
       {isLoading && (
         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
       )}
-      Sign In
+      Sign Up
     </Button>
     <p className="text-sm font-light">
         Do have an account?
         <a href="/signin" className="font-medium hover:underline pl-2">Sign in</a>
     </p>
-    {/* <p>{message}</p> */}
+    <p>{message}</p>
   </div>
   );
 }
