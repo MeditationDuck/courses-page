@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
-import { Product } from "@/types";
+import { Content, Product } from "@/types";
 import axios from "axios";
 import Image from "next/image";
 import { useParams, useSearchParams } from "next/navigation";
@@ -12,12 +12,14 @@ interface ProductClientProps {
   product: Product
   userId: string | undefined
   isOwned: boolean
+  contents: Content[]
 }
 
 const ProductClient = ({
   product,
   userId,
-  isOwned
+  isOwned,
+  contents
 }: ProductClientProps) => {
   
   const onCheckout = async () => {
@@ -69,6 +71,17 @@ const ProductClient = ({
       </Button>
       {!userId && <p>Sign in to buy</p>}
       {isOwned && <p>You have already owned this Product</p>}
+      {isOwned && 
+          <div>
+          {contents?.map((content) => {
+            return (
+              <div key={content.id}>
+                <p>{content.content}</p>
+              </div>
+            )
+          })}
+          </div>
+      }
     </div>
   )
 }

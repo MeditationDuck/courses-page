@@ -8,6 +8,12 @@ export interface Product {
   images: Image[]
 }
 
+
+export interface Content {
+  id: string
+  productId: string
+  content: string
+}
 export interface Image {
   id: string
   url: string
