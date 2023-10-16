@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 import { ProductForm } from "./components/product-form";
-import { Product } from "@prisma/client";
+import { Content, Product } from "@prisma/client";
 
 const ProductPage = async ({
   params
@@ -17,6 +17,11 @@ const ProductPage = async ({
       images: true,
     }
   })
+  const content: Content[] | null = await prisma.content.findMany({
+    where: {
+      productId: params.productId
+    }
+  });
 
  
   return (
@@ -24,6 +29,7 @@ const ProductPage = async ({
       <div className="space-y p-8 pt-6">
         <ProductForm
           initialData={product}
+          initialContent={content}
         />
       </div>
 

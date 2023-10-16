@@ -12,7 +12,7 @@ const GoogleSignInButton = ({
 }:GoogleSignInButtonProps) => {
   const loginWithGoogle = async () => signIn('google', {callbackUrl: '/'});
   return (  
-    <Button onClick={loginWithGoogle} className='w-full'>
+    <Button onClick={loginWithGoogle} className='w-full bg-[#3e4965]'>
       {children}
     </Button>
   );

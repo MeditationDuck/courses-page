@@ -1,7 +1,7 @@
 "use client"
 
 import axios from "axios"
-import { Product } from "@prisma/client"
+import { Content, Product } from "@prisma/client"
 import { useParams, useRouter } from "next/navigation"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
@@ -41,11 +41,13 @@ interface plainProduct {
 
 interface ProductFormProps {
   initialData: Product | null
+  initialContent: Content[] | null
 }
 
 const formSchema = z.object({
   name: z.string().nonempty("Name is required"),
   description: z.string().nonempty("Description is required"),
+  content: z.string().nonempty("Description is required"),
   price: z.coerce.number().positive("Price must be positive"),
   //stock is zero or positive integer
   stock: z.coerce.number().int().min(0, "Stock must be positive"),
@@ -56,7 +58,8 @@ const formSchema = z.object({
 type ProductFormValues = z.infer<typeof formSchema>
 
 export const ProductForm = ({
-  initialData
+  initialData,
+  initialContent
 }:ProductFormProps) => {
 
   const params = useParams()
@@ -70,8 +73,9 @@ export const ProductForm = ({
 
   const form = useForm<ProductFormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData ? {
+    defaultValues: initialData&&initialContent ? {
       ...initialData,
+      ...initialContent[0],
       price: parseFloat(String(initialData?.price)),
     } : {
       name: "",
@@ -80,6 +84,7 @@ export const ProductForm = ({
       stock: 0,
       isArchived: false,
       images: [],
+      content: "",
     }
   })
 
@@ -89,6 +94,9 @@ export const ProductForm = ({
 
       if(initialData) {
         await axios.patch(`/api/products/${params.productId}`, data)
+        if(initialContent) {
+          await axios.patch(`/api/contents/${initialContent[0].id}`, data)
+        }
       }else {
         console.log(data)
         await axios.post(`/api/products`, data)
@@ -183,6 +191,19 @@ export const ProductForm = ({
               />
               <FormField 
                 control={form.control}
+                name="content"
+                render={({field}) => (
+                  <FormItem>
+                    <FormLabel>Content</FormLabel>
+                    <FormControl>
+                      <Textarea className="min-h-[200px]"disabled={loading} placeholder="Content" {...field}/>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField 
+                control={form.control}
                 name="price"
                 render={({field}) => (
                   <FormItem>
@@ -233,7 +254,7 @@ export const ProductForm = ({
           <div className="flex flex-row justify-between px-4 sm:px-10">
           <Button 
             disabled={loading} 
-            // className="mr-auto" 
+            // className="mr-auto"
             type="submit"
           >
             {action}

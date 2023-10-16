@@ -43,11 +43,13 @@ export async function PATCH (
     price,
     images,
     stock,
-    isArchived
+    isArchived,
+    content
   } = body;
 
   if(!name) return new NextResponse("Missing name", {status: 400})
   if(!description) return new NextResponse("Missing description", {status: 400})
+  if(!content) return new NextResponse("Missing content", {status: 400})
   if(!images || !images.length) return new NextResponse("Missing images", {status: 400})
   if(!price) return new NextResponse("Missing price", {status: 400})
   if(stock === undefined) return new NextResponse("Missing stock", {status: 400})
@@ -72,8 +74,21 @@ export async function PATCH (
           }
         },
         isArchived,
+      } 
+    })
+    const curr_content = await prisma.content.findMany({
+      where: {
+        productId: params.productId
       }
     })
+    if(curr_content.length == 0){
+      await prisma.content.create({
+        data: {
+          productId: params.productId,
+          content: content
+        }
+      })
+    }
     return NextResponse.json(product)
   }catch(err) {
     console.log('[PRODUCTS_PATCH]',err)

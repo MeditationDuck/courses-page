@@ -16,6 +16,7 @@ export async function POST(
   const {
     name,
     description,
+    content,
     price,
     images,
     stock,
@@ -24,6 +25,7 @@ export async function POST(
 
   if(!name) return new NextResponse("Missing name", {status: 400})
   if(!description) return new NextResponse("Missing description", {status: 400})
+  if(!content) return new NextResponse("Missing content", {status: 400})
   if(!images || !images.length) return new NextResponse("Missing images", {status: 400})
   if(!price) return new NextResponse("Missing price", {status: 400})
   if(!stock) return new NextResponse("Missing stock", {status: 400})
@@ -45,7 +47,16 @@ export async function POST(
         },
       }
     })
-    return NextResponse.json(product)
+
+    const created_content = await prisma.content.create({
+      data: {
+        productId: product.id,
+        content: content
+      }
+    })
+
+
+    return NextResponse.json({product, created_content})
   }catch(err) {
     console.log('[PRODUCTS_POST]',err)
     return new NextResponse("Internal error", {status: 500})

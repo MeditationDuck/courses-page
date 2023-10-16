@@ -53,7 +53,7 @@ const SignInForm = () => {
   }, [status])
 
   return (
-      <div className="gap-4 bg-gray-400 p-4 w-full sm:w-[50%] flex flex-col rounded-md">
+      <div className="gap-4 bg-gray-400 p-5 w-full sm:w-[50%] flex flex-col rounded-md">
         <div className='text-sm font-medium'>Your Email</div>
         <Input 
           id="email"
@@ -80,7 +80,16 @@ const SignInForm = () => {
           )}
           Sign In
         </Button>
-        or 
+        <div className="relative">
+        <div className="absolute inset-0 flex items-center ">
+          <span className="w-full border-t border-black"/>
+        </div>
+        <div className="relative flex justify-center text-xs uppercase ">
+          <span className="bg-gray-400 px-1">
+            Or continue with
+          </span>
+        </div>
+      </div>
 
         <GoogleSignInButton>
           Sign in with Google
