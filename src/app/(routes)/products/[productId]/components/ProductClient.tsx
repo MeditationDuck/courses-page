@@ -3,10 +3,12 @@
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { Content, Product } from "@/types";
+import '@/app/globals.css';
 import axios from "axios";
 import Image from "next/image";
 import { useParams, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
+import Markdown from 'markdown-to-jsx';
 
 interface ProductClientProps {
   product: Product
@@ -75,8 +77,8 @@ const ProductClient = ({
           <div>
           {contents?.map((content) => {
             return (
-              <div key={content.id}>
-                <p>{content.content}</p>
+              <div key={content.id} className="markdown-content">
+                <Markdown>{content.content}</Markdown>
               </div>
             )
           })}

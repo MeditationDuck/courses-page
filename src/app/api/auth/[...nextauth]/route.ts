@@ -40,7 +40,7 @@ export const authOptions: AuthOptions = {
           const isValidPassword = bcrypt.compareSync(password, userPassword)
           if(!isValidPassword) return null
         }
-        return user
+        return user as any;
       }
     })
   ],

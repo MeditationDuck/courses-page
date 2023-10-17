@@ -13,11 +13,13 @@ declare module 'next-auth/jwt' {
 }
 
 declare module 'next-auth' {
+  interface User {
+    userId: string
+    email: string
+    role: UserRole
+  }
+
   interface Session {
-    user: User & { 
-      userId: string
-      email: string
-      role: UserRole
-    }
+    user: User
   }
 }

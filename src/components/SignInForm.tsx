@@ -50,7 +50,7 @@ const SignInForm = () => {
       router.refresh()
       router.push('/')
     }
-  }, [status])
+  }, [status, router])
 
   return (
       <div className="gap-4 bg-gray-400 p-5 w-full sm:w-[50%] flex flex-col rounded-md">
@@ -95,7 +95,7 @@ const SignInForm = () => {
           Sign in with Google
         </GoogleSignInButton>
         <p className="text-sm font-light">
-            Don't have an account yet?
+            Don&apos;t have an account yet?
             <a href="/signup" className="font-medium hover:underline pl-2">Sign up</a>
         </p>
         <p>{message}</p>

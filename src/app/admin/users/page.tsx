@@ -15,9 +15,9 @@ const AdminUsersPage = async () => {
       </div>
       <div className='p-4'>
         {users.map((user) => (
-          <div>
+          <div key={user.id}>
             <Separator />
-            <div key={user.id}>
+            <div>
               {user.id}
             </div>
             <div>
