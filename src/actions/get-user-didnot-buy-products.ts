@@ -2,6 +2,7 @@
 
 import prisma from "@/lib/prisma"
 import { Product } from "@/types"
+import { Order } from "@prisma/client";
 
 const getUserDidNotBuyProducts = async (userId: string) : Promise <Product[]>=> {
   const orders = await prisma.order.findMany({
@@ -10,7 +11,7 @@ const getUserDidNotBuyProducts = async (userId: string) : Promise <Product[]>=> 
       isPaid: true,
     },
   });
-  const productIds = orders.map((order) => order.productId)
+  const productIds = orders.map((order: Order) => order.productId)
   
   const products = await prisma.product.findMany({
     where: {
