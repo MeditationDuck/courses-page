@@ -66,7 +66,7 @@ const ProductClient = ({
       
       <Button
         onClick={onCheckout}
-        disabled={ !userId || isOwned }
+        disabled={ !userId || isOwned || product.isArchived}
         className="w-fit"
       >
         Buy Now

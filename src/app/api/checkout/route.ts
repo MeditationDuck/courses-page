@@ -34,6 +34,7 @@ export async function POST(
     },
   })
 
+  if(product?.isArchived) return new NextResponse("product is archived", { status: 404 })
 
   if(!!product && product.stock === 0 ) return new NextResponse("product not found", { status: 404 })
 
