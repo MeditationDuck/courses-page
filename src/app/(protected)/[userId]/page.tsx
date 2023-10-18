@@ -19,7 +19,6 @@ const UserPage = async ({
       </div>
     )
   }
-  console.log(session.user)
   const products = await getUserOwnedProducts(params.userId)
   return (
     <div className='flex flex-col w-full px-4 lg:px-8'>
