@@ -22,7 +22,10 @@ const ProductList = ({
             </div>
           )
         }
-        {products.map((product) => {
+        {products
+          .sort((a, b) => 
+            (a.isArchived === b.isArchived ? 0 : a.isArchived ? 1 : -1))
+          .map((product) => {
           return  (
             <ProductCard key={product.id} data={product} />
           )

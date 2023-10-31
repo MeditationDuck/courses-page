@@ -24,3 +24,12 @@ export interface User {
   id: string
   email: string
 }
+
+export interface Order {
+  id: string
+  userId: string
+  isPaid: string
+  createdAt: string
+  paidAt: string
+  Product: Product
+}

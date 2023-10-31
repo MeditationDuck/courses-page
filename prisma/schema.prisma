@@ -100,14 +100,15 @@ model Image {
 }
 
 model Order {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  user      User      @relation(fields: [userId], references: [id])
   productId String
-  Product   Product  @relation(fields: [productId], references: [id])
-  isPaid    Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  Product   Product   @relation(fields: [productId], references: [id])
+  isPaid    Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  paidAt    DateTime? @db.DateTime
 
   @@index([userId], name: "userId")
   @@index([productId], name: "productId")

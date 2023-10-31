@@ -2,6 +2,7 @@ import { getServerSession } from 'next-auth'
 import React from 'react'
 import { authOptions } from '../api/auth/[...nextauth]/route'
 import { UserRole } from '@prisma/client'
+import AdminNavbar  from '@/components/AdminNavbar'
 
 interface AdminLayoutProps {
   children: React.ReactNode | React.ReactNode[]
@@ -18,6 +19,7 @@ const AdminLayout = async ({
   
   return (
     <div>
+      <AdminNavbar />
       {children}
     </div>
   )

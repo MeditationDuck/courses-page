@@ -45,12 +45,12 @@ const MainNav = ({
           >
             Sign In
           </Button>
-          <Button
+          {/* <Button
             onClick={() => router.push("/signup")}
             variant="secondary"
           >
             Sign Up
-          </Button>
+          </Button> */}
         
         </>
       )}
