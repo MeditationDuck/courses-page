@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { CldUploadWidget } from "next-cloudinary";
 import {Button } from "@/components/ui/button";
+import Image from 'next/image';
 
 const  UploadImage = () => {
   const [imageUrl, setImageUrl] = useState('');
@@ -35,7 +36,10 @@ const  UploadImage = () => {
       {imageUrl && (
         <div>
           <p>Uploaded Image:</p>
-          <img src={imageUrl} alt="Uploaded Content" />
+          <Image
+                src={imageUrl}
+                alt="Uploaded Content"
+              />
           <p className ="p-4">{imageUrl}</p>
         </div>
       )}
