@@ -47,7 +47,13 @@ export async function POST(
     where: {
       userId,
       productId,
-      isPaid: true,
+      OR: [{
+        isPaid: true,
+      }, 
+      {
+        hasAccess: true,
+      }
+      ]
     },
   });
   if(payedOrderExists) return new NextResponse("order already exists", { status: 400 })
