@@ -2,6 +2,7 @@ import prisma from "@/lib/prisma";
 import { ProductForm } from "./components/product-form";
 import { Content, Product } from "@prisma/client";
 import Markdown from "markdown-to-jsx";
+import UploadImage from "./components/upload_image";
 
 const ProductPage = async ({
   params
@@ -31,6 +32,7 @@ const ProductPage = async ({
           initialData={product}
           initialContent={content}
         />
+        <UploadImage/>
         <div>
           {content?.map((content) => {
             return (
