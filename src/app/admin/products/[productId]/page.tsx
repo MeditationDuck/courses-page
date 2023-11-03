@@ -1,6 +1,7 @@
 import prisma from "@/lib/prisma";
 import { ProductForm } from "./components/product-form";
 import { Content, Product } from "@prisma/client";
+import Markdown from "markdown-to-jsx";
 
 const ProductPage = async ({
   params
@@ -22,7 +23,6 @@ const ProductPage = async ({
       productId: params.productId
     }
   });
-
  
   return (
     <div className="flex-col">
@@ -31,8 +31,16 @@ const ProductPage = async ({
           initialData={product}
           initialContent={content}
         />
+        <div>
+          {content?.map((content) => {
+            return (
+              <div key={content.id} className="markdown-content">
+                <Markdown>{content.content}</Markdown>
+              </div>
+            )
+          })}
+          </div>
       </div>
-
     </div>
   );
 }

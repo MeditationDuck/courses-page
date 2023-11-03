@@ -86,7 +86,7 @@ body,
 .markdown-content {
   font-family: Arial, sans-serif; /* Change to your desired font family */
   line-height: 1.5;
-  color: #333; /* Change to your desired color */
+  color: var(--primary); /* Change to your desired color */
   max-width: 800px;
   margin: 0 auto;
   padding: 16px;
@@ -96,14 +96,15 @@ body,
 .markdown-content h1 {
   font-size: 2em;
   margin-top: 0;
-  border-bottom: 2px solid #eaecef;
+  /* font: var(--primary); */
+  /* border-bottom: 2px solid #eaecef; */
   padding-bottom: 0.3em;
 }
 
 .markdown-content h2 {
   font-size: 1.75em;
   margin-top: 24px;
-  border-bottom: 1px solid #eaecef;
+  /* border-bottom: 1px solid #eaecef; */
   padding-bottom: 0.3em;
 }
 
@@ -169,7 +170,7 @@ body,
 
 /* Code */
 .markdown-content pre {
-  background-color: #f6f8fa;
+  background-color: #1f1f1f;
   padding: 16px;
   overflow-x: auto;
   border-radius: 4px;
@@ -178,7 +179,7 @@ body,
 .markdown-content code {
   font-family: 'Courier New', Courier, monospace;
   font-size: 0.9em;
-  background-color: #f6f8fa;
+  background-color: #1f1f1f;
   padding: 2px 5px;
   border-radius: 4px;
 }
