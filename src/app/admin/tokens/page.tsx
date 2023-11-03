@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useState } from "react";
 
-const tokenPage  = () => {
+const TokenPage  = () => {
   const [token, setToken] = useState('')
   const onCreateToken = async () => {
     try{
@@ -24,4 +24,4 @@ const tokenPage  = () => {
   );
 }
  
-export default tokenPage;
+export default TokenPage;
