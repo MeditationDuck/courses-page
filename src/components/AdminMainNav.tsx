@@ -24,6 +24,9 @@ const MainNav = ({
       <Link href="/admin/orders">
         Orders
       </Link>
+      <Link href="/admin/tokens">
+        Tokens
+      </Link>
     </div>
   )
 }

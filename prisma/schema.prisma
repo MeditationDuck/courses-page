@@ -106,10 +106,20 @@ model Order {
   productId String
   Product   Product   @relation(fields: [productId], references: [id])
   isPaid    Boolean   @default(false)
+  hasAccess Boolean   @default(false)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   paidAt    DateTime? @db.DateTime
 
   @@index([userId], name: "userId")
   @@index([productId], name: "productId")
+}
+
+model Token {
+  id          String    @id @default(cuid())
+  token       String    @unique @default(cuid())
+  Description String?
+  createdAt   DateTime  @default(now())
+  usedAt      DateTime?
+  expiresAt   DateTime?
 }

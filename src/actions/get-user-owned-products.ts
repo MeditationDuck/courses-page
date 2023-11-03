@@ -5,8 +5,16 @@ const getUserOwnedProducts = async (userId: string) : Promise <Product[]>=> {
   const orders = await prisma.order.findMany({
     where: {
       userId,
-      isPaid: true,
+      OR: [
+        {
+          isPaid: true,
+        },
+        {
+          hasAccess: true,
+        },
+      ],
     },
+  
   });
   const productIds = orders.map((order) => order.productId)
   
